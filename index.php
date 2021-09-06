@@ -1,7 +1,7 @@
 <?php
 
 echo "УЕБОК ГО ДБД";
-//HI FROM ubuntu
+//HI FROM ubuntug
 
 ?>
 
