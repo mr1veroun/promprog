@@ -1,6 +1,6 @@
 <?php
 
-echo "УЕБОК ГО ДБД";
+echo "HELLO ГО ДБД";
 //HI FROM ubuntug
 
 ?>
