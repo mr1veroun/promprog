@@ -1,4 +1,5 @@
 <?php
+
 // Connect to DB
 $db = new PDO("mysql:host=localhost;dbname=promprog", "promprog", "1221");
 
@@ -9,18 +10,24 @@ $st->execute();
 
 $userData = $st->fetch(PDO::FETCH_ASSOC);
 
-var_dump($result);
+if( !empty($userData) ){
+    $token = md5($userData['login'] . $userData['password'] . microtime(true));
 
-if(!empty($userData)) {
+    $st = $db->prepare("UPDATE users SET token = :t WHERE id = :id");
+    $st->bindParam(':t', $token);
+    $st->bindParam(':id', $userData['id']);
+    $st->execute();
+
+
     echo json_encode([
-        'status' => 'ok'
-    ]); 
+        'status' => 'ok',
+        'token' => $token
+    ]);
 } else {
     echo json_encode([
         'status' => 'error',
         'description' => 'Credentials are invalid'
-    ]); 
+    ]);
 }
-
 
 ?>
